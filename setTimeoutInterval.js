@@ -1,7 +1,7 @@
 'use strict';
 let config = require('./config');
 
-let interval = function (callback, time) {
+let interval = (callback, time) => {
     setTimeout(() => {
         callback();
         interval(callback, time);

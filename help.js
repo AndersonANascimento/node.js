@@ -4,7 +4,12 @@ let options = [
     'a) pid',
     'b) title',
     'c) arch',
-    'd) platform'
+    'd) platform',
+    'e) env',
+    'm) memory usage',
+    'u) uptime',
+    'v) versions',
+    'q) quit',
 ];
 
 exports.showOptions = () => {

@@ -1,8 +1,14 @@
+'use strict';
 /* Definindo variável global(Atenção! Não recomendado) */
 // max = 10000; // ou 
 // global.max = 10000; // ou 
 // GLOBAL.max = 10000; // ou 
 // root.max = 10000;
+
+/* Teste serialGenerator (Globals).js */
+console.log("\n->> Teste do serialGenerator (Globals)");
+var serialGenerator = require('./serialGenerator');
+console.log(serialGenerator.generate());
 
 /* Teste serialGeneratorV1.js */
 var serialGenerator = require('./serialGeneratorV1');

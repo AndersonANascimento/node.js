@@ -1,5 +1,5 @@
 'use strict';
-console.log('módulo em ./serialGeneratorV1.js exec....');
+console.log('\nmódulo em ./serialGeneratorV1.js exec....');
 // let max = 10000;
 let config = require('./config');
 

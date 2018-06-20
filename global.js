@@ -1,3 +1,5 @@
+'use strict';
+
 console.log(global);
 
 console.log("\n->> Object.keys(global)");

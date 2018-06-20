@@ -1,6 +1,10 @@
 'use strict';
 let config = require('./config');
-setTimeout(() => {
+
+let t = setTimeout(() => {
     console.log('B ' + new Date());
 }, config.timeout);
+
+console.log(t);
+
 console.log('A ' + new Date());

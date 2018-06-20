@@ -51,4 +51,4 @@
 
 ## Aula 5 - Process
 - Um processo é uma instância de um determinado programa em execução no sistema operacional;
-- 
+- stdout, stderr, stdin;
