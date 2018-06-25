@@ -26,6 +26,20 @@ switch (options[0]) {
     case 'd':
         console.log('platform: ' + process.platform);
         break;
+    case 'e':
+        console.dir(process.env);
+        break;
+    case 'm':
+        console.log(process.memoryUsage());
+        break;
+    case 'u':
+        console.log('uptime: ' + process.uptime());
+        break;
+    case 'v':
+        console.dir(process.versions);
+        break;
+    case 'q':
+        process.exit();
     default:
         help.showOptions();
         break;

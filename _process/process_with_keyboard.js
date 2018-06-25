@@ -43,8 +43,8 @@ process.on('exit', () => {
 });
 
 
-process.on('uncaughtException', () => {
-    console.log('error!');
+process.on('uncaughtException', (err) => {
+    console.log('error!' + err);
 });
 
 a.b();

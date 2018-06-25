@@ -40,8 +40,8 @@ net.createServer(function (connection) {
     });
 
     connection.on('end', function () {
-        broadcast(connection.nickname + ' has left!', connection);
         console.log(`${connection.nickname} saindo por 'end'`);        
+        broadcast(connection.nickname + ' has left!', connection);
         connections.splice(connections.indexOf(connection), 1);
     });
     

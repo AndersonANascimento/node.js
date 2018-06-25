@@ -10,4 +10,4 @@ let konsole = {
 };
 
 konsole.log('A TTY: ' + !!process.stdout.isTTY);
-konsole.error('B TTY: ' + !!process.stdout.isTTY);
+konsole.error('B TTY: ' + !!process.stderr.isTTY);
