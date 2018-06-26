@@ -5,7 +5,8 @@ let createRouter = (port) => {
 
     const api = {};
     const routes = {};
-    const methods = ['GET', 'POST'];
+    const methods = ['GET', 'POST', 'OPTIONS'];
+    const interceptors = [];
 
     methods.forEach((method) => {
         routes[method] = {};
@@ -14,12 +15,47 @@ let createRouter = (port) => {
         };
     });
 
-    http.createServer((req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        
-        if(!routes[req.method][req.url]) return res.end();
+    api.interceptor = (interceptor) => {
+        interceptors.push(interceptor);
+    };
 
-        routes[req.method][req.url](req, res);
+    const executeInterceptors = (number, req, res) => {
+        const interceptor = interceptors[number];
+
+        if(!interceptor) return;
+
+        interceptor(req, res, ()=>{
+            executeInterceptors(++number, req, res);
+        });
+    };
+
+    const handleBody = (req, res, next) => {
+        const body = [];
+        req.on('data', (chunk) => {
+            // console.log(chunk);
+            body.push(chunk);
+        });
+        req.on('end', () => {
+            req.body = Buffer.concat(body).toString();
+            next();
+        });
+    };
+
+    http.createServer((req, res) => {
+        // console.log(req.method);
+        
+        handleBody(req, res, () => {
+
+            executeInterceptors(0, req, res);
+            
+            if(!routes[req.method][req.url]) {
+                res.statusCode = 404;
+                return res.end();
+            }
+            
+            routes[req.method][req.url](req, res);
+        });
+        
     }).listen(port);
 
     return api;

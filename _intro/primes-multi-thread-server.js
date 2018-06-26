@@ -1,6 +1,8 @@
-var cluster = require('cluster');
-var http = require('http');
-var isPrime = require('./number-util').isPrime;
+'use strict';
+
+const cluster = require('cluster');
+const http = require('http');
+const isPrime = require('./number-util').isPrime;
 
 if (cluster.isMaster) {
 	console.log('Cluster');
@@ -11,16 +13,19 @@ if (cluster.isMaster) {
     return;
 }
 
-var count = 1;
-var server = http.createServer(function (req, res) {
+let count = 1;
+let server = http.createServer((req, res) => {
 	console.log('Primes #' + count++ + " @ " + process.pid);
 	console.time('primes');
-	var number = 0;
-	var numberOfPrimes = 0;
+
+	let number = 0;
+	let numberOfPrimes = 0;
+	
 	while(true) {
     	if(isPrime(++number)) numberOfPrimes++;
     	if(numberOfPrimes === 1000000) break;
 	}
+	
 	res.end("Number: " + number);
 	console.timeEnd('primes');
 });

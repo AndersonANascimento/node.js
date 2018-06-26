@@ -15,6 +15,19 @@ let contatos = [
     {id: 3, nome: "Mariana", telefone: "9999-9999", data: new Date(), operadora: operadoras[2]}
 ];
 
+app.interceptor(function (req, res, next) {
+    console.log('executando interceptor 0');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
+app.interceptor(function (req, res, next) {
+    console.log('executando interceptor 1');
+    res.setHeader('Content-Type', 'application/json;charset=utf-8');
+    next();
+});
+
 app.get('/operadoras', function (req, res) {
     res.write(JSON.stringify(operadoras));
     res.end();
@@ -26,5 +39,12 @@ app.get('/contatos', function (req, res) {
 });
 
 app.post('/contatos', function (req, res) {
+    let contato = req.body;    
+    // console.log(contato);
+    contatos.push(JSON.parse(contato));
+    res.end();
+});
+
+app.options('/contatos', function (req, res) {
     res.end();
 });
