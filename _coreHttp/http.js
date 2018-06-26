@@ -1,7 +1,7 @@
 'use strict';
 const router = require('./router');
 
-let app = route(3412);
+let app = router(3412);
 
 let operadoras = [
     {nome: "Oi", codigo: 14, categoria: "Celular", preco: 2},
@@ -25,7 +25,6 @@ app.get('/contatos', function (req, res) {
     res.end();
 });
 
-app.get('/contatos', function (req, res) {
-    res.write(JSON.stringify(contatos));
+app.post('/contatos', function (req, res) {
     res.end();
 });
